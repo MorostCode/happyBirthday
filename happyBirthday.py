@@ -1,12 +1,16 @@
 # -*- coding: utf-8 -*-
 from PyQt5.QtWidgets import QMainWindow, QApplication, QDesktopWidget
 from happyBirthdayUI import Ui_MainWindow
-from PyQt5.QtGui import QIcon, QPixmap
-from img import imglsl, cakeIcon
-from PyQt5.QtCore import Qt
+from staticImg import iconCake
+from PyQt5.QtGui import QIcon
 from PyQt5.uic import loadUi
-import base64
+from PyQt5.QtCore import Qt
+from lslImg import imglsl
+import selftools
 import sys
+
+# 口令密码
+titlePassword = "lsl生日快乐"
 
 
 class MainWindow(Ui_MainWindow, QMainWindow):
@@ -24,26 +28,21 @@ class MainWindow(Ui_MainWindow, QMainWindow):
         newLeft = int((screenSize.width() - selfSize.width()) / 2)
         newTop = int((screenSize.height() - selfSize.height()) / 2)
         self.move(newLeft, newTop)  # 移动到居中位置
+        self.pushButton.setIcon(QIcon(selftools.img2pixmap(iconCake)))  # 设置按钮图标
 
-        image = get_icon(imglsl)
+        # 获取图片数据并缩放成合适大小
+        image = selftools.img2pixmap(imglsl)
         image = image.scaledToWidth(521)
         image = image.scaledToHeight(723)
         self.image.setPixmap(image)
 
+        # 绑定按钮
         self.pushButton.clicked.connect(self.if_close)
-        self.pushButton.setIcon(QIcon(get_icon(cakeIcon)))
 
+    # 只有输对口令才可以关闭程序
     def if_close(self):
-        if self.lineEdit.text() == "lsl生日快乐":
+        if self.lineEdit.text() == titlePassword:
             sys.exit()
-
-
-# 图标bytes转成pixmap
-def get_icon(icon):
-    icon_img = base64.b64decode(icon)  # 解码
-    icon_pixmap = QPixmap()  # 新建QPixmap对象
-    icon_pixmap.loadFromData(icon_img)  # 往QPixmap中写入数据
-    return icon_pixmap
 
 
 if __name__ == '__main__':

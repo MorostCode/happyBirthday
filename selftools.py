@@ -1,10 +1,20 @@
 """
 自编写函数库
 """
+from PyQt5.QtGui import QPixmap
 import hashlib
 import random
+import base64
 import cv2
 import os
+
+
+# 将图片bytes转成pixmap
+def img2pixmap(bytes_img):
+    img_data = base64.b64decode(bytes_img)  # 解码
+    pixmap_data = QPixmap()  # 新建QPixmap对象
+    pixmap_data.loadFromData(img_data)  # 往QPixmap中写入数据
+    return pixmap_data
 
 
 # 生成随机颜色（十六进制）
