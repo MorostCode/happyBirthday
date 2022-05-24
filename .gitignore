@@ -13,7 +13,6 @@ dist
 *.7z
 *.rar
 
-lslImg.py
 testfile2.py
 testfile3.py
 testfile4.py
