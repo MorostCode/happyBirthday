@@ -5,12 +5,12 @@ from staticImg import iconCake
 from PyQt5.QtGui import QIcon
 from PyQt5.uic import loadUi
 from PyQt5.QtCore import Qt
-from lslImg import imglsl
-import selftools
+import selfQtools
 import sys
 
 # 口令密码
-titlePassword = "lsl生日快乐"
+# lsl生日快乐
+titlePassword = ""
 
 
 class MainWindow(Ui_MainWindow, QMainWindow):
@@ -28,13 +28,11 @@ class MainWindow(Ui_MainWindow, QMainWindow):
         newLeft = int((screenSize.width() - selfSize.width()) / 2)
         newTop = int((screenSize.height() - selfSize.height()) / 2)
         self.move(newLeft, newTop)  # 移动到居中位置
-        self.pushButton.setIcon(QIcon(selftools.img2pixmap(iconCake)))  # 设置按钮图标
+        self.pushButton.setIcon(QIcon(selfQtools.base642pixmap(iconCake)))  # 设置按钮图标
 
-        # 获取图片数据并缩放成合适大小
-        image = selftools.img2pixmap(imglsl)
-        image = image.scaledToWidth(521)
-        image = image.scaledToHeight(723)
-        self.image.setPixmap(image)
+        # # 获取图片数据并缩放成合适大小
+        # pixmap = selfQtools.base642pixmap(imgToSet)
+        # selfQtools.pixmap2label(pixmap, self.image)
 
         # 绑定按钮
         self.pushButton.clicked.connect(self.if_close)
