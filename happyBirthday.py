@@ -8,8 +8,7 @@ from PyQt5.QtCore import Qt
 import selfQtools
 import sys
 
-# 口令密码
-# lsl生日快乐
+# 口令密码：XXX生日快乐
 titlePassword = ""
 
 
